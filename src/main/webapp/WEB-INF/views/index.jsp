@@ -11,7 +11,7 @@
             <li><a href="#" class="btn btn--without-border">O co chodzi?</a></li>
             <li><a href="#" class="btn btn--without-border">O nas</a></li>
             <li><a href="#" class="btn btn--without-border">Fundacje i organizacje</a></li>
-            <li><a href="#" class="btn btn--without-border">Przekaż dary</a></li>
+            <li><a href="<c:url value="http://localhost:8080/addGift"/>" class="btn btn--without-border">Przekaż dary</a></li>
             <li><a href="#" class="btn btn--without-border">Kontakt</a></li>
         </ul>
     </nav>
