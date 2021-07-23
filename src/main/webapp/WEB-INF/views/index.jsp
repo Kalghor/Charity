@@ -80,9 +80,11 @@
         <h2>O nas</h2>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptas vitae animi rem pariatur incidunt libero
             optio esse quisquam illo omnis.</p>
-        <img src="<c:url value="../../resources/images/signature.svg"/>" class="about-us--text-signature" alt="Signature"/>
+        <img src="<c:url value="../../resources/images/signature.svg"/>" class="about-us--text-signature"
+             alt="Signature"/>
     </div>
-    <div class="about-us--image"><img src="<c:url value="../../resources/images/about-us.jpg"/>" alt="People in circle"/>
+    <div class="about-us--image"><img src="<c:url value="../../resources/images/about-us.jpg"/>"
+                                      alt="People in circle"/>
     </div>
 </section>
 
@@ -91,37 +93,26 @@
 
     <!-- SLIDE 1 -->
     <div class="help--slides active" data-id="1">
-        <p>W naszej bazie znajdziesz listę zweryfikowanych Fundacji, z którymi współpracujemy.
+        <p> W naszej bazie znajdziesz listę zweryfikowanych Fundacji, z którymi współpracujemy.
             Możesz sprawdzić czym się zajmują.</p>
 
         <ul class="help--slides-items">
-            <li>
-                <div class="col">
-                    <div class="title">Fundacja "Dbam o Zdrowie"</div>
-                    <div class="subtitle">Cel i misja: Pomoc dzieciom z ubogich rodzin.</div>
-                </div>
-
-                <div class="col">
-                    <div class="title">Fundacja "A kogo"</div>
-                    <div class="subtitle">Cel i misja: Pomoc wybudzaniu dzieci ze śpiączki.</div>
-                </div>
-            </li>
-
-            <li>
-                <div class="col">
-                    <div class="title">Fundacja “Dla dzieci"</div>
-                    <div class="subtitle">Cel i misja: Pomoc osobom znajdującym się w trudnej sytuacji życiowej.</div>
-                </div>
-                <div class="col">
-                    <div class="title">Fundacja “Bez domu”</div>
-                    <div class="subtitle">Cel i misja: Pomoc dla osób nie posiadających miejsca zamieszkania</div>
-                </div>
-
-            </li>
-
+                <c:forEach var="institution" items="${institutionList}" varStatus="count">
+                <c:if test="${count.index % 2 == 0}">
+                <li>
+                    </c:if>
+                    <div class="col">
+                        <div class="title">${institution.name}</div>
+                        <div class="subtitle">${institution.description}</div>
+                    </div>
+                    <c:if test="${count.index %2!=0}">
+                </li>
+                <li>
+                    </c:if>
+                    </c:forEach>
         </ul>
-    </div>
 
+    </div>
 </section>
 <footer>
     <div class="contact">
@@ -139,8 +130,10 @@
     <div class="bottom-line">
         <span class="bottom-line--copy">Copyright &copy; 2018</span>
         <div class="bottom-line--icons">
-            <a href="#" class="btn btn--small"><img src="<c:url value="../../resources/images/icon-facebook.svg"/>"/></a>
-            <a href="#" class="btn btn--small"><img src="<c:url value="../../resources/images/icon-instagram.svg"/>"/></a>
+            <a href="#" class="btn btn--small"><img
+                    src="<c:url value="../../resources/images/icon-facebook.svg"/>"/></a>
+            <a href="#" class="btn btn--small"><img
+                    src="<c:url value="../../resources/images/icon-instagram.svg"/>"/></a>
         </div>
     </div>
 </footer>
