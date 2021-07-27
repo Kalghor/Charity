@@ -2,10 +2,12 @@ package pl.coderslab.charity.domain.model;
 
 import lombok.Data;
 import lombok.ToString;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -34,9 +36,11 @@ public class Donation {
     private String city;
 
     @Column(name = "zipCode")
+//    @Column(name = "zipCode", columnDefinition = "char(6)")
     private String zipCode;
 
     @Column(name = "pickUpDate")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate pickUpDate;
 
     @Column(name = "pickUpTime")
@@ -44,5 +48,8 @@ public class Donation {
 
     @Column(name = "pickUpComment")
     private String pickUpComment;
+
+    @Column(name = "phone_number")
+    private String phoneNumber;
 
 }

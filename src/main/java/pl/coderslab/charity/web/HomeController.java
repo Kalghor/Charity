@@ -3,9 +3,7 @@ package pl.coderslab.charity.web;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import pl.coderslab.charity.domain.model.Donation;
 import pl.coderslab.charity.domain.model.Institution;
 import pl.coderslab.charity.service.DonationService;
 import pl.coderslab.charity.service.InstitutionService;
@@ -24,30 +22,23 @@ public class HomeController {
         this.donationService = donationService;
     }
 
-
-//    @ModelAttribute("institutionList")
-//    public List<Institution> institutionList() {
-//        return ;
-//    }
-
     @GetMapping("/")
     public String homePage(Model model) {
-        List<Donation> donations = donationService.donationList();
-        model.addAttribute("numberOfBags", numberOfBags(donations));
-        model.addAttribute("numberOfGifts", numberOfGifts(donations));
-        model.addAttribute("institutionList", institutionService.institutionList());
+        Long donations = donationService.getDonationNumber();
+        List<Integer> quantitiesValues = donationService.getQuantitiesValues();
+        List<Institution> institutions = institutionService.institutionList();
+        model.addAttribute("numberOfBags", getNumberOfGifts(quantitiesValues));
+        model.addAttribute("numberOfGifts", donations);
+        model.addAttribute("institutionList", institutions);
+        model.addAttribute("numberOfInstitutions", institutions.size());
         return "index";
     }
 
-    private int numberOfBags(List<Donation> list) {
-        int numberOfBags = 0;
-        for (Donation d : list) {
-            numberOfBags += d.getQuantity();
+    private int getNumberOfGifts(List<Integer> list) {
+        int sum = 0;
+        for (Integer i : list){
+            sum += i;
         }
-        return numberOfBags;
-    }
-
-    private int numberOfGifts(List<Donation> list) {
-        return list.size();
+        return sum;
     }
 }

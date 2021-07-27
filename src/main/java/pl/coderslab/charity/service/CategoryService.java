@@ -17,4 +17,8 @@ public class CategoryService {
     public List<Category> distinctCategoryList(){
         return categoryRepository.findDistinctBy();
     }
+
+    public Category findCategoryByName(String name){
+        return categoryRepository.findByName(name);
+    }
 }

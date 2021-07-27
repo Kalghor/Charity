@@ -1,7 +1,6 @@
 package pl.coderslab.charity.service;
 
 import org.springframework.stereotype.Service;
-import pl.coderslab.charity.domain.model.Donation;
 import pl.coderslab.charity.domain.repository.DonationRepository;
 
 import java.util.List;
@@ -15,7 +14,11 @@ public class DonationService {
         this.donationRepository = donationRepository;
     }
 
-    public List<Donation> donationList(){
-        return (List<Donation>) donationRepository.findAll();
+    public Long getDonationNumber(){
+        return donationRepository.count();
+    }
+
+    public List<Integer> getQuantitiesValues(){
+        return donationRepository.findQuantitiesValues();
     }
 }
