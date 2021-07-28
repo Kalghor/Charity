@@ -8,6 +8,8 @@
 <html lang="pl">
 <head>
     <%@include file="header.jsp" %>
+    <script src="<c:url value="../../resources/js/summary.js"/>" defer></script>
+
 </head>
 <body>
 <header class="header--form-page">
@@ -24,10 +26,11 @@
         </ul>
 
         <ul>
-            <li><a href="index.jsp" class="btn btn--without-border active">Start</a></li>
+            <li><a href="<c:url value="/"/>" class="btn btn--without-border active">Start</a></li>
             <li><a href="index.jsp#steps" class="btn btn--without-border">O co chodzi?</a></li>
             <li><a href="index.jsp#about-us" class="btn btn--without-border">O nas</a></li>
             <li><a href="index.jsp#help" class="btn btn--without-border">Fundacje i organizacje</a></li>
+            <li><a href="<c:url value="/addGift"/>" class="btn btn--without-border">Przekaż dary</a></li>
             <li><a href="index.jsp#contact" class="btn btn--without-border">Kontakt</a></li>
         </ul>
     </nav>
@@ -109,7 +112,7 @@
                 <div class="form-group form-group--inline">
                     <label>
                         Liczba 60l worków:
-                        <form:input type="number" step="1" min="1" path="quantity"/>
+                        <form:input type="number" id="numberOfBags" step="1" min="1" path="quantity"/>
                     </label>
                 </div>
 
@@ -126,8 +129,8 @@
                 <c:forEach var="institution" items="${Institutions}">
                     <div class="form-group form-group--checkbox">
                         <label>
-                            <form:radiobutton path="institution" value="${institution.id}"/>
-
+                            <form:radiobutton id="institution" name="${institution.name}" path="institution"
+                                              value="${institution.id}"/>
                             <span class="checkbox radio"></span>
                             <span class="description">
                   <div class="title">${institution.name}</div>
@@ -153,22 +156,22 @@
                     <div class="form-section--column">
                         <h4>Adres odbioru</h4>
                         <div class="form-group form-group--inline">
-                            <label> Ulica <form:input type="text" path="street"/> </label>
+                            <label> Ulica <form:input id="street" type="text" path="street"/> </label>
                         </div>
 
                         <div class="form-group form-group--inline">
-                            <label> Miasto <form:input type="text" path="city"/> </label>
+                            <label> Miasto <form:input id="city" type="text" path="city"/> </label>
                         </div>
 
                         <div class="form-group form-group--inline">
                             <label>
-                                Kod pocztowy <form:input type="text" path="zipCode"/>
+                                Kod pocztowy <form:input id="zipCode" type="text" path="zipCode"/>
                             </label>
                         </div>
 
                         <div class="form-group form-group--inline">
                             <label>
-                                Numer telefonu <form:input type="phone" path="phoneNumber"/>
+                                Numer telefonu <form:input id="phoneNumber" type="phone" path="phoneNumber"/>
                             </label>
                         </div>
                     </div>
@@ -176,30 +179,30 @@
                     <div class="form-section--column">
                         <h4>Termin odbioru</h4>
                         <div class="form-group form-group--inline">
-                            <label> Data <form:input type="date" path="pickUpDate"/> </label>
+                            <label> Data <form:input id="pickUpDate" type="date" path="pickUpDate"/> </label>
                         </div>
 
                         <div class="form-group form-group--inline">
-                            <label> Godzina <form:input type="time" path="pickUpTime"/> </label>
+                            <label> Godzina <form:input id="pickUpTime" type="time" path="pickUpTime"/> </label>
                         </div>
 
                         <div class="form-group form-group--inline">
                             <label>
                                 Uwagi dla kuriera
-                                <form:textarea rows="5" path="pickUpComment"></form:textarea>
+                                <form:textarea rows="5" id="pickUpComment" path="pickUpComment"></form:textarea>
                             </label>
                         </div>
                     </div>
                 </div>
                 <div class="form-group form-group--buttons">
-                    <button type="button" class="btn prev-step fiveStepBtn">Wstecz</button>
-                    <button type="button" class="btn next-step">Dalej</button>
+                    <button type="button" class="btn prev-step ">Wstecz</button>
+                    <button type="button" id="summaryBtn" class="btn next-step fiveStepBtn">Dalej</button>
                 </div>
             </div>
 
             <!-- STEP 6 -->
             <div data-step="5">
-            <form:form action="form-confirmation.jsp" method="post" modelAttribute="donation">
+<%--                <form:form action="form-confirmation.jsp" method="post" modelAttribute="donation">--%>
 
                     <h3>Podsumowanie Twojej darowizny</h3>
                     <div class="summary">
@@ -208,15 +211,14 @@
                             <ul>
                                 <li>
                                     <span class="icon icon-bag"></span>
-                                    <span class="summary--text"
-                                    >${donation.quantity} worki</span
-                                    >
+                                    <span id="numberOfBagsSummary" class="summary--text"></span>
+
                                 </li>
 
                                 <li>
                                     <span class="icon icon-hand"></span>
-                                    <span class="summary--text"
-                                    >Dla ${donation.institution.name}</span
+                                    <span id="institutionSummary" class="summary--text"
+                                    >Dla </span
                                     >
                                 </li>
                             </ul>
@@ -226,19 +228,19 @@
                             <div class="form-section--column">
                                 <h4>Adres odbioru:</h4>
                                 <ul>
-                                    <li>${donation.street}</li>
-                                    <li>${donation.city}</li>
-                                    <li>${donation.zipCode}</li>
-                                    <li>${donation.phoneNumber}</li>
+                                    <li id="streetSummary"></li>
+                                    <li id="citySummary"></li>
+                                    <li id="zipCodeSummary"></li>
+                                    <li id="phoneNumberSummary"></li>
                                 </ul>
                             </div>
 
                             <div class="form-section--column">
                                 <h4>Termin odbioru:</h4>
                                 <ul>
-                                    <li>${donation.pickUpDate}</li>
-                                    <li>${donation.pickUpTime}</li>
-                                    <li>${donation.pickUpComment}</li>
+                                    <li id="pickUpDateSummary"></li>
+                                    <li id="pickUpTimeSummary"></li>
+                                    <li id="pickUpCommentSummary"></li>
                                 </ul>
                             </div>
                         </div>
@@ -248,7 +250,7 @@
                         <button type="button" class="btn prev-step">Wstecz</button>
                         <button type="submit" class="btn">Potwierdzam</button>
                     </div>
-                </form:form>
+<%--                </form:form>--%>
             </div>
         </form:form>
     </div>

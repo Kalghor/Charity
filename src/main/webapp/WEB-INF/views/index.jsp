@@ -19,11 +19,11 @@
         </ul>
 
         <ul>
-            <li><a href="#" class="btn btn--without-border active">Start</a></li>
+            <li><a href="<c:url value="/"/>" class="btn btn--without-border active">Start</a></li>
             <li><a href="#" class="btn btn--without-border">O co chodzi?</a></li>
             <li><a href="#" class="btn btn--without-border">O nas</a></li>
             <li><a href="#" class="btn btn--without-border">Fundacje i organizacje</a></li>
-            <li><a href="<c:url value="http://localhost:8080/addGift"/>" class="btn btn--without-border">Przekaż dary</a></li>
+            <li><a href="<c:url value="/addGift"/>" class="btn btn--without-border">Przekaż dary</a></li>
             <li><a href="#" class="btn btn--without-border">Kontakt</a></li>
         </ul>
     </nav>
@@ -118,9 +118,9 @@
                     <div class="subtitle">${institution.description}</div>
                 </div>
                 <c:if test="${count.index %2!=0}">
-<%--                    <c:if test="${count.index == numberOfInstitutions}">--%>
-<%--                        <div class="col"></div>--%>
-<%--                    </c:if>--%>
+                    <c:if test="${count.index == numberOfInstitutions}">
+                        <div class="col"></div>
+                    </c:if>
                     </li>
                 </c:if>
             </c:forEach>
