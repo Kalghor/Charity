@@ -1,8 +1,7 @@
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html lang="pl">
@@ -118,14 +117,14 @@
                     <div class="subtitle">${institution.description}</div>
                 </div>
                 <c:if test="${count.index %2!=0}">
-                    <c:if test="${count.index == numberOfInstitutions}">
-                        <div class="col"></div>
-                    </c:if>
                     </li>
                 </c:if>
             </c:forEach>
+            <c:if test="${numberOfInstitutions % 2 != 0}">
+                <div style="visibility: hidden" class="col"></div>
+                </li>
+            </c:if>
         </ul>
-
     </div>
 </section>
 <footer>

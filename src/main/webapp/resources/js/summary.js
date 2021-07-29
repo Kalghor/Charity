@@ -1,6 +1,5 @@
 const btnSummary = document.querySelector("#summaryBtn");
 const numberOfBags = document.querySelector("#numberOfBags");
-const institution = document.querySelectorAll("#institution");
 const street = document.querySelector("#street");
 const city = document.querySelector("#city");
 const zipCode = document.querySelector("#zipCode");
@@ -22,6 +21,15 @@ const pickUpCommentSummary = document.querySelector("#pickUpCommentSummary");
 
 
 btnSummary.addEventListener("click", ev => {
+    debugger;
+    const institution = document.querySelector(".institution:checked ~ .description .title");
+
+    // institution.forEach(el => {
+    //     if (el.checked) {
+    //         institutionSummary.innerHTML = "Dla " + el.name;
+    //         console.log(el.innerHTML);
+    //     }
+    // })
 
     numberOfBagsSummary.innerText = numberOfBags.value + " worki";
     institutionSummary.innerHTML = "Dla " + institution.innerHTML;
@@ -33,7 +41,5 @@ btnSummary.addEventListener("click", ev => {
     pickUpTimeSummary.innerHTML = pickUpTime.value;
     pickUpCommentSummary.innerHTML = pickUpComment.value;
 
-    console.log(institution)
-    // console.log()
     // console.log(institution)
 })
